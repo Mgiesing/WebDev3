@@ -5,7 +5,7 @@ function connectdb()
     $dbUsername = "student";
     $dbPassword = "student";
     $dbHostname = "localhost";
-    $dbName = "bruidswebsite";
+    $dbName = "WebdevBinas";
 
     // Create connection
     $conn = new mysqli($dbHostname, $dbUsername, $dbPassword, $dbName);
@@ -18,23 +18,8 @@ function connectdb()
 //    echo "Connected successfully";
 
     return $conn;
-}
-
-
-
-function writeGarbage() {
-
-    $conn = connectdb("wenslijst");
-
-    $sql = "INSERT INTO wenslijst (item) VALUES ('wcpapier')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
 
     $conn->close();
 }
 
-?>
+
