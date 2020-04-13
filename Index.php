@@ -89,8 +89,10 @@
             <button class="btn btn-homepage" id="btn4" href="">Leerpocessen, lesopbouw en toetsing</button><br>
               <button class="btn btn-homepage" id="btn5" href="">Natuurweten-schappelijke denk- en werkwijzen</button><br>
               <button class="btn btn-homepage" id="btn6" href="">Digitale didactiek</button><br>
-              <button class="btn" id="btninlog" href="">Inloggen</button>
+
+              <button class="nav-item active"><a class="nav-link" href="login.php">Inloggen</a> </button>
           </div>
+
           <div class="col-xl-2">
               <button class="btn btn-homepage" id="btn7" href="">Doorlopende leerlijn en samenhang met andere vakken</button><br>
               <button class="btn btn-homepage" id="btn8" href="">Social scientific issues<br>
