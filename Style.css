@@ -1,0 +1,65 @@
+.homepage {
+  background-image: url(background.png);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center, top;
+  background-size: cover;
+}
+
+.btn-homepage {
+  padding-top: 0;
+  text-align: left;
+  width: 100%;
+  height: 150;
+  margin: 10;
+  border-radius: 25px;
+}
+
+#btn1 {
+  background-color: #ff0000;
+}
+
+#btn2 {
+  background-color: #00cc00;
+}
+
+#btn3 {
+  background-color: #9900ff;
+}
+
+#btn4 {
+  background-color: #ff6600;
+}
+
+#btn5 {
+  background-color: #00cccc;
+}
+
+#btn6 {
+  background-color: #ff00cc;
+}
+
+#btn7 {
+  background-color: #ffcc00;
+}
+
+#btn8 {
+  background-color: #3399ff;
+}
+
+#btn9 {
+  background-color: #cc0066;
+  color: white;
+}
+
+#btninlog {
+  background-color: #3399ff;
+  color: white;
+  text-align: center;
+  width: 100%;
+  margin: 10;
+}
+
+#btncontact {
+  background-color: rgb(0, 163, 163);
+}
