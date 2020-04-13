@@ -90,6 +90,7 @@
               <button class="btn btn-homepage" id="btn5" href="">Natuurweten-schappelijke denk- en werkwijzen</button><br>
               <button class="btn btn-homepage" id="btn6" href="">Digitale didactiek</button><br>
 
+              <!-- Dynamic buttons -->
               <?php
 
               if (!isset($_SESSION['username'])) {
@@ -100,7 +101,6 @@
                   echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
               }
               ?>
-              <!--- <button class="nav-item active"><a class="nav-link" href="login.php">Inloggen</a> </button>  -->
           </div>
 
           <div class="col-xl-2">
