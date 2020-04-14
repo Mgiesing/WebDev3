@@ -20,10 +20,10 @@ if(isset($_POST["login"])) {
             $check = $stmt->fetch();
 
             if ($_SESSION['password'] == $check['password'] && !empty($_SESSION['email']) && !empty($_SESSION['password']))
-                header('Location: index.php');
+                header('Location: Index.php');
 
             else {
-                header('Location: index.php');
+                header('Location: Index.php');
             }
             exit;
         }
@@ -46,7 +46,7 @@ if(isset($_POST["login"])) {
     }
     ?>
     <h3 align="">Login</h3><br />
-    <form method="post" action="index.php">
+    <form method="post" action="Index.php">
         <label>Username</label>
         <input type="text" name="email" class="form-control" />
         <br />
