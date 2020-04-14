@@ -1,37 +1,32 @@
 <?php
+
+
 require 'connect.php';
+
+
 session_start();
 if(isset($_POST["login"])) {
     if (empty($_POST["username"]) || empty($_POST["password"])) {
         $message = '<label>All fields are required</label>';
     } else {
-        $_SESSION['Id'] = "LoginB";
+        $_SESSION['Id'] = "student";
         $_SESSION['password'] = $_POST['password'];
-        $_SESSION['email'] = $_POST['username'];
+        $_SESSION['email'] = $_POST['email'];
 
-        if ($_SESSION['Id'] == "LoginB"){
+        if ($_SESSION['Id'] == "student"){
 
             $stmt = $conn->prepare("SELECT password FROM Users WHERE email=?");
             $stmt->execute([$_SESSION['email']]);
             $check = $stmt->fetch();
 
             if ($_SESSION['password'] == $check['password'] && !empty($_SESSION['email']) && !empty($_SESSION['password']))
-                header('Location: BrideHome.php');
+                header('Location: index.php');
 
             else {
                 header('Location: index.php');
             }
             exit;
         }
-    }
-}
-
-if(isset($_POST["guest_login"])){
-    if(empty($_POST["bridecode"])){
-        $message = '<label>All fields are required</label>';
-    } else {
-        $_SESSION['bridecode'] = $_POST['bridecode'];
-        header('location: guest.php');
     }
 }
 
@@ -53,7 +48,7 @@ if(isset($_POST["guest_login"])){
     <h3 align="">Login</h3><br />
     <form method="post" action="index.php">
         <label>Username</label>
-        <input type="text" name="username" class="form-control" />
+        <input type="text" name="email" class="form-control" />
         <br />
         <label>Password</label>
         <input type="password" name="password" class="form-control" />
@@ -63,12 +58,6 @@ if(isset($_POST["guest_login"])){
             <a href="signup.php">sign up</a>
         </p>
     </form>
-
-    <h3 align="">Guest Login</h3><br />
-    <form method="post" action="index.php">
-        <label>bridecode</label>
-        <input type="text" name="bridecode" class="form-control" />
-        <input type="submit" name="guest_login" class="btn btn-info" value="Login" />
 
     </form>
 </div>
