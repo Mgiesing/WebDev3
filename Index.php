@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <html>
   <head>
     <title>Homepage</title>
@@ -98,6 +102,11 @@
               <button class="btn btn-homepage" id="btn5" href="">Natuurweten-schappelijke denk- en werkwijzen</button><br>
               <button class="btn btn-homepage" id="btn6" href="">Digitale didactiek</button><br>
 
+
+              <?php
+              $_SESSION['email'] = bob;
+
+              ?>
               <!-- Dynamic buttons -->
               <?php
 
