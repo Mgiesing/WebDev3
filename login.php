@@ -2,7 +2,6 @@
 session_start();
 require 'connect.php';
 
-
 if(isset($_POST["login"])) {
     if (empty($_POST["username"]) || empty($_POST["password"])) {
         $message = '<label>All fields are required</label>';

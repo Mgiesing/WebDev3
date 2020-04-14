@@ -3,8 +3,10 @@
 session_start();
 require 'connect.php';
 
+if (isset($_SESSION['email'])) {
+    header("Location: Index.php");
+}
 
-session_start();
 if(isset($_POST["signup"])) {
 
     if (empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
