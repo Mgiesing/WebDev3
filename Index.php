@@ -55,12 +55,12 @@
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <?php
 
-              if (!isset($_SESSION['username'])) {
+              if (!isset($_SESSION['email'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
 
               }
 
-              if (isset($_SESSION['username'])) {
+              if (isset($_SESSION['email'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Database</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
@@ -101,11 +101,11 @@
               <!-- Dynamic buttons -->
               <?php
 
-              if (!isset($_SESSION['username'])) {
+              if (!isset($_SESSION['email'])) {
               echo '<button class="nav-item active"><a class="nav-link" href="login.php">Inloggen</a></button>';
 
               }
-              if (isset($_SESSION['username'])) {
+              if (isset($_SESSION['email'])) {
                   echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
               }
               ?>
