@@ -71,9 +71,8 @@ session_start();
 
               }
 
-              if (isset($_SESSION['email'])) {
-                  echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
-                  echo '<a class="nav-item active"><a class="nav-link" href="#">Database</a>';
+              if (!isset($_SESSION['email'])) {
+                  echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
                   echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
 
