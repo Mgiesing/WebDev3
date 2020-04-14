@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $servername = "localhost";
 $username = "student";
 $password = "student";
@@ -10,6 +8,7 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=Binask", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   
 
 
 }
@@ -43,14 +42,14 @@ catch(PDOException $e)
 
     <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="Index.php">Home</a></li>
-    <li><a href="input.php">Database</a></li>
+    <li><a href="">Home</a></li>
+    <li><a href="">Database</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
 
 <div id="table1" style="float:left" class="btn-group">
 
-    <form method="post" action="Index.php">
+    <form method="post" action="zoek.php">
     <label class="container">Noten
         <input type="checkbox" name="Noten" id="Noten" value="Noten">
     </label>
@@ -64,7 +63,7 @@ catch(PDOException $e)
     </label>
 
     <label class="container">Memes
-        <input type="checkbox" name="Memes" id="Memes" value="Games">
+        <input type="checkbox" name="Memes" id="Memes" value="Memes">
     </label>
         <button type="submit" name="checkbox">Submit</button>
     </form>
@@ -72,12 +71,18 @@ catch(PDOException $e)
 </div>
 
 <div id="table2" style="float:left">
-    <form method="post" action="index.php">
+    <form method="post" action="zoek.php">
     <button type="submit" name="zoek">Submit</button>
     <input type="text" name="zoek" placeholder="Search">
     </form>
     <div id="table5">
         <?php
+
+
+
+
+
+
 
         if(isset($_POST["zoek"])) {
             if (empty($_POST['zoek'])) {
@@ -126,7 +131,7 @@ catch(PDOException $e)
 
         } else{
 
-            if(isset($_POST["Noten"])) {
+            if(isset($_POST["Noten"]) || isset($_POST["NotenHome"])){
 
 
                 $noten = $_POST['Noten'];
@@ -265,6 +270,7 @@ catch(PDOException $e)
 <div id="table4">
 
 </div>
+
 
 
 </body>
