@@ -1,5 +1,5 @@
 <?php
-// Start session, needed for header checks //Marco
+//Start session, needed for header checks //Marco
 session_start();
 
 var_dump($_SESSION);
