@@ -1,7 +1,5 @@
 <?php
 // Start session, needed for header checks
-require 'connect.php';
-
 session_start();
 
 $stmt = $conn->prepare("SELECT code FROM Users WHERE email=?");
