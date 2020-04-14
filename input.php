@@ -61,7 +61,7 @@ if(isset($_POST["submit"])){
 
                     }
 
-                    if (!isset($_SESSION['email'])) {
+                    if (isset($_SESSION['email'])) {
                         echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
                         echo '<a class="nav-item"><a class="nav-link" href="#">Portfolio</a>';
                         echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
