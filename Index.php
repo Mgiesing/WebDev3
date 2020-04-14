@@ -1,6 +1,12 @@
 <?php
+
+require 'connect.php';
+
 session_start();
 ?>
+
+
+
 
 <html>
   <head>
