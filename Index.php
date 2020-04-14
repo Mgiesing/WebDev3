@@ -2,6 +2,7 @@
 // Start session, needed for header checks
 session_start();
 
+var_dump($_SESSION);
 ?>
 
 
@@ -64,12 +65,12 @@ session_start();
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <?php
 
-              if (!isset($_SESSION['email'])) {
+              if (!isset($_SESSION['userId'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
 
               }
 
-              if (!isset($_SESSION['email'])) {
+              if (isset($_SESSION['userId'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';

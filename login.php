@@ -1,28 +1,31 @@
 <?php
-session_start();
 require 'connect.php';
 
+session_start();
+
 if(isset($_POST["login"])) {
-    if (empty($_POST["username"]) || empty($_POST["password"])) {
+    $password = $_POST['password'];
+    $email = $_POST['email'];
+
+    if (empty($_POST["email"]) || empty($_POST["password"])) {
         $message = '<label>All fields are required</label>';
+        var_dump($_POST);
+
     } else {
-        $_SESSION['Id'] = "student";
-        $_SESSION['password'] = $_POST['password'];
-        $_SESSION['email'] = $_POST['email'];
+        $stmt = $conn->prepare("SELECT password FROM Users WHERE email=?");
+        $stmt->execute($email);
+        $check = $stmt->fetch();
 
-        if ($_SESSION['Id'] == "student"){
+        var_dump($check);
 
-            $stmt = $conn->prepare("SELECT password FROM Users WHERE email=?");
-            $stmt->execute([$_SESSION['email']]);
-            $check = $stmt->fetch();
+        if (isset($check['password']) && $password == $check['password']) {//TODO: Add hashing.
+            $_SESSION['username'] = $email;
+            $_SESSION['userId'] = "default";
 
-            if ($_SESSION['password'] == $check['password'] && !empty($_SESSION['email']) && !empty($_SESSION['password']))
-                header('Location: Index.php');
+            header('Location: Index.php');
+        }
+        else {
 
-            else {
-                header('Location: Index.php');
-            }
-            exit;
         }
     }
 }
@@ -43,7 +46,7 @@ if(isset($_POST["login"])) {
     }
     ?>
     <h3 align="">Login</h3><br />
-    <form method="post" action="Index.php">
+    <form method="post">
         <label>Username</label>
         <input type="text" name="email" class="form-control" />
         <br />

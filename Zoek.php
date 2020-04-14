@@ -79,12 +79,6 @@ catch(PDOException $e)
     <div id="table5">
         <?php
 
-
-
-
-
-
-
         if(isset($_POST["zoek"])) {
             if (empty($_POST['zoek'])) {
 
