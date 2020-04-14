@@ -1,8 +1,9 @@
 <?php
-
+// Start session, needed for header checks
 require 'connect.php';
 
 session_start();
+
 ?>
 
 
