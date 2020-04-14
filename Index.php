@@ -4,6 +4,12 @@ require 'connect.php';
 
 session_start();
 
+$stmt = $conn->prepare("SELECT code FROM Users WHERE email=?");
+$stmt->execute([$_SESSION['email']]);
+$check = $stmt->fetch();
+$code = $check['code'];
+
+echo "$code"
 ?>
 
 
