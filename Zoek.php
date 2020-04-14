@@ -41,8 +41,8 @@ catch(PDOException $e)
 
     <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="">Home</a></li>
-    <li><a href="">Database</a></li>
+    <li><a href="Index.php">Home</a></li>
+    <li><a href="input.php">Database</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
 
