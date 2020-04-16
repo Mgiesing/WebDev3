@@ -1,23 +1,7 @@
 <?php
-$servername = "localhost";
-$username = "student";
-$password = "student";
-$dbname = "Binask";
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=Binask", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-   
-
-
-}
-catch(PDOException $e)
-{
-    echo "Connection failed: " . $e->getMessage();
-}
-
-
+session_start();
+require 'connect.php';
 
 ?>
 <html lang="en">
@@ -42,29 +26,29 @@ catch(PDOException $e)
 
     <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="Index.php">Home</a></li>
-    <li><a href="Zoek.php">Zoek bronnen</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="zoek.php">Zoek bronnen</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
 
 <div id="table1" style="float:left" class="btn-group">
 
     <form method="post" action="zoek.php">
-    <label class="container">Noten
-        <input type="checkbox" name="Noten" id="Noten" value="Noten">
-    </label>
+        <label class="container">Noten
+            <input type="checkbox" name="Noten" id="Noten" value="Noten">
+        </label>
 
-    <label class="container">Youtuber
-        <input type="checkbox" name="Youtuber" id="Youtuber" value="Youtuber">
-    </label>
+        <label class="container">Youtuber
+            <input type="checkbox" name="Youtuber" id="Youtuber" value="Youtuber">
+        </label>
 
-    <label class="container">Games
-        <input type="checkbox" name="Games" id="Games" value="Games">
-    </label>
+        <label class="container">Games
+            <input type="checkbox" name="Games" id="Games" value="Games">
+        </label>
 
-    <label class="container">Memes
-        <input type="checkbox" name="Memes" id="Memes" value="Memes">
-    </label>
+        <label class="container">Memes
+            <input type="checkbox" name="Memes" id="Memes" value="Memes">
+        </label>
         <button type="submit" name="checkbox">Submit</button>
     </form>
 
@@ -72,8 +56,8 @@ catch(PDOException $e)
 
 <div id="table2" style="float:left">
     <form method="post" action="zoek.php">
-    <button type="submit" name="zoek">Submit</button>
-    <input type="text" name="zoek" placeholder="Search">
+        <button type="submit" name="zoek">Submit</button>
+        <input type="text" name="zoek" placeholder="Search">
     </form>
     <div id="table5">
         <?php
@@ -81,37 +65,15 @@ catch(PDOException $e)
 
 
 
-
-
-
         if(isset($_POST["zoek"])) {
             if (empty($_POST['zoek'])) {
 
-                $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit");
-                $get->execute();
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
+                $result = $conn->query($sql);
 
-                foreach ($get->fetchAll() as $row) {
-
-                    echo "<div id='Bron'>";
-
-                    Echo $row["Titel"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["Omschrijving"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["URL"];
-                    Echo "<br>";
-                    echo "</div>";
-                  }
-                }
-            else{
-
-                    $submit = $_POST['zoek'];
-                    $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron WHERE Titel = '$submit' ORDER BY prioriteit");
-                    $get->execute();
-
-                    foreach ($get->fetchAll() as $row) {
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
 
                         echo "<div id='Bron'>";
 
@@ -125,8 +87,33 @@ catch(PDOException $e)
                         Echo "<br>";
                         echo "</div>";
                     }
-
                 }
+            }
+            else{
+
+                $submit = $_POST['zoek'];
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE Titel = '$submit' ORDER BY prioriteit";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+
+                        echo "<div id='Bron'>";
+
+                        Echo $row["Titel"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["Omschrijving"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["URL"];
+                        Echo "<br>";
+                        echo "</div>";
+                    }
+                }
+
+            }
 
 
         } else{
@@ -136,23 +123,26 @@ catch(PDOException $e)
 
                 $noten = $_POST['Noten'];
 
-                $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie = '$noten' ORDER BY prioriteit");
-                $get->execute();
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie = '$noten' ORDER BY prioriteit";
+                $result = $conn->query($sql);
 
-                foreach ($get->fetchAll() as $row) {
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
 
-                    echo "<div id='Bron'>";
+                        echo "<div id='Bron'>";
 
-                    Echo $row["Titel"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["Omschrijving"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["URL"];
-                    Echo "<br>";
-                    echo "</div>";
+                        Echo $row["Titel"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["Omschrijving"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["URL"];
+                        Echo "<br>";
+                        echo "</div>";
 
+                    }
                 }
             }
 
@@ -160,79 +150,12 @@ catch(PDOException $e)
 
                 $Youtuber = $_POST['Youtuber'];
 
-                $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Youtuber' ORDER BY prioriteit");
-                $get->execute();
+                $sql ="SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Youtuber' ORDER BY prioriteit";
+                $result = $conn->query($sql);
 
-                foreach ($get->fetchAll() as $row) {
-
-                    echo "<div id='Bron'>";
-
-                    Echo $row["Titel"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["Omschrijving"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["URL"];
-                    Echo "<br>";
-                    echo "</div>";
-                }
-
-            }
-
-            if(isset($_POST["Games"])) {
-
-                $Games = $_POST['Games'];
-
-                $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Games' ORDER BY prioriteit");
-                $get->execute();
-
-                foreach ($get->fetchAll() as $row) {
-
-                    echo "<div id='Bron'>";
-
-                    Echo $row["Titel"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["Omschrijving"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["URL"];
-                    Echo "<br>";
-                    echo "</div>";
-                }
-
-            }
-
-            if(isset($_POST["Memes"])) {
-
-                $Memes = $_POST['Memes'];
-
-                $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Memes' ORDER BY prioriteit");
-                $get->execute();
-
-                foreach ($get->fetchAll() as $row) {
-
-                    echo "<div id='Bron'>";
-
-                    Echo $row["Titel"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["Omschrijving"];
-                    Echo "<br>";
-                    Echo "<br>";
-                    Echo $row["URL"];
-                    Echo "<br>";
-                    echo "</div>";
-                }
-
-            } else if(!isset($_POST['Noten']) && !isset($_POST['Youtuber']) && !isset($_POST['Games']) && !isset($_POST['Memes'])){
-
-
-                    $get = $conn->prepare("SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit");
-                    $get->execute();
-
-                    foreach ($get->fetchAll() as $row) {
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
 
                         echo "<div id='Bron'>";
 
@@ -247,6 +170,85 @@ catch(PDOException $e)
                         echo "</div>";
                     }
                 }
+
+            }
+
+            if(isset($_POST["Games"])) {
+
+                $Games = $_POST['Games'];
+
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Games' ORDER BY prioriteit";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+
+                        echo "<div id='Bron'>";
+
+                        Echo $row["Titel"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["Omschrijving"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["URL"];
+                        Echo "<br>";
+                        echo "</div>";
+                    }
+                }
+
+            }
+
+            if(isset($_POST["Memes"])) {
+
+                $Memes = $_POST['Memes'];
+
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Memes' ORDER BY prioriteit";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+
+                        echo "<div id='Bron'>";
+
+                        Echo $row["Titel"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["Omschrijving"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["URL"];
+                        Echo "<br>";
+                        echo "</div>";
+                    }
+                }
+
+            } else if(!isset($_POST['Noten']) && !isset($_POST['Youtuber']) && !isset($_POST['Games']) && !isset($_POST['Memes'])){
+
+
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while ($row = $result->fetch_assoc()) {
+
+                        echo "<div id='Bron'>";
+
+                        Echo $row["Titel"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["Omschrijving"];
+                        Echo "<br>";
+                        Echo "<br>";
+                        Echo $row["URL"];
+                        Echo "<br>";
+                        echo "</div>";
+                    }
+                }
+            }
 
 
         }
