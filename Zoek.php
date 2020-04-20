@@ -92,7 +92,7 @@ require 'connect.php';
             else{
 
                 $submit = $_POST['zoek'];
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE Titel = '$submit' ORDER BY prioriteit";
+                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE Omschrijving LIKE '%$submit%' ORDER BY prioriteit";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
