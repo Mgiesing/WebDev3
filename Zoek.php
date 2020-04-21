@@ -3,6 +3,9 @@
 session_start();
 require 'connect.php';
 
+if (!isset($_SESSION['username'])) {
+//TODO: Implemnt multile types of users: a.k.a. Student, Manager enz. and change the page accordingly.
+header('Location: login.php');
 ?>
 <html lang="en">
 

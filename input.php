@@ -57,6 +57,68 @@ if ( isset($_POST['update'])) {
 
 ?>
 <html lang="nl">
+<body>
+<div>
+    <nav
+            class="navbar navbar-expand-sm navbar-dark"
+            style="background-color: #000000;"
+    >
+        <a
+                class="navbar-brand"
+                href="https://start.nhlstenden.com/"
+                target="blanc"
+        >Start NHL Stenden</a
+        >
+        <button
+                class="navbar-toggler d-lg-none"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapsibleNavId"
+                aria-controls="collapsibleNavId"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        ></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <?php
+
+                //Dynamic buttons if user is not logged in show home if user is logged in show the rest aswell  //Marco
+
+                if (!isset($_SESSION['username'])) {
+                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
+
+                }
+
+                if (isset($_SESSION['username'])) {
+                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
+                    echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
+                    echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
+                    echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
+                    echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
+
+                }
+                ?>
+            </ul>
+
+
+            <form class="form-inline my-2 my-lg-0">
+                <input
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Zoeken"
+                />
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+                    Zoeken
+                </button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+</body>
+
+
+
 <head>
     <title>Docentenpage</title>
     <!-- Required meta tags -->

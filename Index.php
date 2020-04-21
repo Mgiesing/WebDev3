@@ -73,6 +73,7 @@ session_start();
               }
 
               if (isset($_SESSION['username'])) {
+                  echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
