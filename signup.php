@@ -27,17 +27,17 @@ if (isset($_SESSION['username'])) {
     };
     ?>
     <h3 align="">Signup</h3><br />
-    <form method="post" action="signup.php">
+    <form method="post" id="registerform">
         <label>email</label>
-        <input type="text" name="email" class="form-control" />
+        <input type="text" name="username" class="form-control" />
         <br />
         <label>Password</label>
         <input type="password" name="password" class="form-control" />
         <br />
         <label>Password again</label>
-        <input type="password" name="password2" class="form-control" />
+        <input type="password" name="passwordVerify" class="form-control" />
         <br />
-        <input type="submit" name="signup" class="btn btn-info" value="signup" />
+        <input type="submit" name="registerFormSubmit" class="btn btn-info" value="Register" />
     </form>
 
     </form>

@@ -4,33 +4,33 @@ require_once("databaseConnection.php");
 
 if(isset($_POST['loginFormSubmit'])) {
     //Get username/password from form
-    $email = $_POST['username'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
 
 
     //Check if user exists
-    $check = userExists($email);
+    $check = userExists($username);
 
     //Username/password has to be > 1
     if (isset($check) && count($check) > 1) {
-        userLogin($email, $password);
+        userLogin($username, $password);
     } else {
-        $_SESSION['error'] = 'Email of wachtwoord onjuist';
+        $_SESSION['error'] = 'Gebruikersnaam of wachtwoord onjuist';
     }
 
 }
 
 //Check if user excists function
 
-function userExists ($email) {
+function userExists ($username) {
 
     //Connect to database
     $conn = connectdb();
 
     //Check if user exists in database
-    $sql = "SELECT password FROM Users WHERE email=?"; // SQL with parameters
+    $sql = "SELECT * FROM Users WHERE username=?"; // SQL with parameters
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result(); // get the mysqli result
     $user = $result->fetch_assoc(); // fetch data
@@ -42,14 +42,14 @@ function userExists ($email) {
 }
 
 //Login function
-function userLogin ($email, $password) {
+function userLogin ($username, $password) {
     $conn = connectdb();
 
     //Check if user exists in database
 
-    $sql = "SELECT * FROM Users WHERE email=?"; // SQL with parameters
+    $sql = "SELECT * FROM Users WHERE username=?"; // SQL with parameters
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result(); // get the mysqli result
     $user = $result->fetch_assoc(); // fetch data
@@ -62,7 +62,7 @@ function userLogin ($email, $password) {
         $_SESSION['code'] = $user['code'];
         $_SESSION['error'] = 'Login successvol.';
     } else {
-        $_SESSION['error'] = 'Email of wachtwoord onjuist';
+        $_SESSION['error'] = 'Gebruikersnaam of wachtwoord onjuist';
     }
 
 
