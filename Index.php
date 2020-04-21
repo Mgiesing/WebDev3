@@ -72,12 +72,12 @@ session_start();
             //This is the case with all the dynamic buttons because they look for a userId and if no one is logged in there is no userId
             //If you would like to go to the pages you could currently without being logged in change the link from for example
             //  /Index.php to Zoek.php
-              if (!isset($_SESSION['userId'])) {
+              if (!isset($_SESSION['username'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
 
               }
 
-              if (isset($_SESSION['userId'])) {
+              if (isset($_SESSION['username'])) {
                   echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
                   echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
@@ -118,11 +118,11 @@ session_start();
               <!-- Dynamic buttons -->
               <?php
               //Dynamic buttons if user is not logged in show login if user is logged in show logout  //Marco
-              if (!isset($_SESSION['email'])) {
+              if (!isset($_SESSION['username'])) {
               echo '<button class="nav-item active"><a class="nav-link" href="login.php">Inloggen</a></button>';
 
               }
-              if (isset($_SESSION['email'])) {
+              if (isset($_SESSION['username'])) {
                   echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
               }
               ?>

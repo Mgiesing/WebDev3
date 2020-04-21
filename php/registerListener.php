@@ -34,16 +34,18 @@ function createUser($username, $password, $passwordVerify)
     else {
         //Hash user password
         $hash = password_hash($password, PASSWORD_DEFAULT);
-        $code = uniqid();
         //Connect to database
         $conn = connectdb();
 
         // prepare and bind
-        $stmt = $conn->prepare("INSERT INTO Users (username, password, code) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $hash, $code);
+        $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+        $stmt->bind_param("ss", $username, $hash);
         $stmt->execute();
 
-        $_SESSION['error'] = "Account aangemaakt!";
+        var_dump($stmt->error);
+
+        if ($stmt->error) $_SESSION['error'] = "Internal server error!";
+        else $_SESSION['error'] = "Account aangemaakt!";
 
 
         $stmt->close();
