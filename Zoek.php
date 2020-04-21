@@ -1,12 +1,8 @@
 <?php
 
 session_start();
-require 'connect.php';
+require 'databaseConnection.php';
 
-if (!isset($_SESSION['username'])) {
-//TODO: Implemnt multile types of users: a.k.a. Student, Manager enz. and change the page accordingly.
-    header('Location: login.php');
-}
 ?>
 <html lang="en">
 
@@ -30,14 +26,14 @@ if (!isset($_SESSION['username'])) {
 
     <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="Index.php">Home</a></li>
-    <li><a href="Zoek.php">Zoek bronnen</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="zoek.php">Zoek bronnen</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
 
 <div id="table1" style="float:left" class="btn-group">
 
-    <form method="post" action="Zoek.php">
+    <form method="post" action="zoek.php">
         <label class="container">Noten
             <input type="checkbox" name="Noten" id="Noten" value="Noten">
         </label>
@@ -59,13 +55,13 @@ if (!isset($_SESSION['username'])) {
 </div>
 
 <div id="table2" style="float:left">
-    <form method="post" action="Zoek.php">
+    <form method="post" action="zoek.php">
         <button type="submit" name="zoek">Submit</button>
         <input type="text" name="zoek" placeholder="Search">
     </form>
     <div id="table5">
         <?php
-
+        $conn = connectdb();
 
 
 
@@ -96,7 +92,7 @@ if (!isset($_SESSION['username'])) {
             else{
 
                 $submit = $_POST['zoek'];
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE Omschrijving LIKE '%$submit%' ORDER BY prioriteit";
+                $sql = "SELECT * FROM Bron WHERE ( Titel LIKE '%$submit%' OR Omschrijving LIKE '%$submit%') ORDER BY prioriteit";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -233,6 +229,7 @@ if (!isset($_SESSION['username'])) {
 
 
                 $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
+                $conn = connectdb();
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
