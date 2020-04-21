@@ -26,14 +26,14 @@ require 'databaseConnection.php';
 
     <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="zoek.php">Zoek bronnen</a></li>
+    <li><a href="Index.php">Home</a></li>
+    <li><a href="Zoek.php">Zoek bronnen</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
 
 <div id="table1" style="float:left" class="btn-group">
 
-    <form method="post" action="zoek.php">
+    <form method="post" action="Zoek.php">
         <label class="container">Noten
             <input type="checkbox" name="Noten" id="Noten" value="Noten">
         </label>
@@ -55,7 +55,7 @@ require 'databaseConnection.php';
 </div>
 
 <div id="table2" style="float:left">
-    <form method="post" action="zoek.php">
+    <form method="post" action="Zoek.php">
         <button type="submit" name="zoek">Submit</button>
         <input type="text" name="zoek" placeholder="Search">
     </form>
