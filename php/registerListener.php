@@ -42,7 +42,7 @@ function createUser($username, $password, $passwordVerify)
         $stmt->bind_param("ss", $username, $hash);
         $stmt->execute();
 
-        var_dump($stmt->error);
+//        var_dump($stmt->error);
 
         if ($stmt->error) $_SESSION['error'] = "Internal server error!";
         else $_SESSION['error'] = "Account aangemaakt!";
@@ -50,6 +50,7 @@ function createUser($username, $password, $passwordVerify)
 
         $stmt->close();
         $conn->close();
+        header("Location: login.php");
     }
 
 }

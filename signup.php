@@ -18,6 +18,8 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 </head>
 <body>
+
+
 <br />
 <div class="container" style="width:500px;">
     <?php

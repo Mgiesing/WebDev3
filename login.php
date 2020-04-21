@@ -6,6 +6,7 @@ if (isset($_SESSION['error'])) unset($_SESSION['error']);
 
 //Require login listener
 require_once('php/loginListener.php');
+
 //Can't go to login page when logged in.
 if (isset($_SESSION['username'])) {
     header("Location: Index.php");
@@ -17,6 +18,9 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 </head>
 <body>
+
+
+
 <br />
 
 <div class="container">
@@ -31,7 +35,8 @@ if (isset($_SESSION['username'])) {
                 <input type="submit" value="Login" name="loginFormSubmit">
             </form>
             <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
+                <a class="underlineHover" href="#">Forgot Password?</a> <br>
+                <a class="underlineHover" href="signup.php">Register</a>
             </div>
             <?php
             //If there is a error, display it to the user.
