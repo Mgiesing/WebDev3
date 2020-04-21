@@ -12,11 +12,13 @@ if (isset($_SESSION['username'])) {
     header("Location: Index.php");
 }
 ?>
+
 <html>
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 </head>
+
 <body>
 
 
