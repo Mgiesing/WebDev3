@@ -1,32 +1,15 @@
 <?php
-
+//Start user data storage session
 session_start();
-require 'connect.php';
+//Clear any old errors
+if (isset($_SESSION['error'])) unset($_SESSION['error']);
 
-if (isset($_SESSION['email'])) {
+//Require login listener
+require_once('php/registerListener.php');
+
+//Can't go to login page when logged in.
+if (isset($_SESSION['username'])) {
     header("Location: Index.php");
-}
-
-if(isset($_POST["signup"])) {
-
-    if (empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["password2"])) {
-        $message = '<label>All fields are required</label>';
-
-    } else if ($_POST["password"] !== $_POST["password2"]) {
-        $message = '<label>passwords are incorrect</label>';
-
-    } else {
-
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $Docent = 0;
-
-        $query = "INSERT INTO Users(email, password, Docent) VALUES('$email', '$password', $Docent)";
-        if ($conn->exec($query) === TRUE) {
-
-        }
-
-    }
 }
 ?>
 <html>
@@ -38,10 +21,10 @@ if(isset($_POST["signup"])) {
 <br />
 <div class="container" style="width:500px;">
     <?php
-    if(isset($message))
-    {
-        echo '<label class="text-danger">'.$message.'</label>';
-    }
+    //If there is a error, display it to the user.
+    if (isset($_SESSION['error'])) {
+    echo '<br><div class="alert alert-primary" role="alert">' . $_SESSION['error'] . '</div>';
+    };
     ?>
     <h3 align="">Signup</h3><br />
     <form method="post" action="signup.php">
