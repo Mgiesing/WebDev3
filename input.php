@@ -1,26 +1,15 @@
 <?php
-session_start();
 
+session_start();
+require 'databaseConnection.php';
 // When someone doesn't have a Id, there are send to the login.php page. //Marco
-if (!isset($_SESSION['username'])) {
+if (isset($_SESSION['Id'])) {
     //TODO: Implemnt multile types of users: a.k.a. Student, Manager enz. and change the page accordingly.
     header('Location: login.php');
 }
 
+$conn = connectdb();
 
-$servername = "localhost";
-$username = "student";
-$password = "student";
-$dbname = "Binask";
-
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=Binask", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} catch (PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
 
 if (isset($_POST["submit"])) {
 
@@ -30,95 +19,43 @@ if (isset($_POST["submit"])) {
     $categorie = $_POST['categorie'];
     $Prioriteit = $_POST ['prioriteit'];
 
-    $query = "INSERT INTO Bron (Titel, Omschrijving, URL, categorie, prioriteit ) VALUES ('$Titel', '$omschrijving', '$URL', '$categorie', '$Prioriteit')";
+    $sql = "INSERT INTO Bron (Titel, Omschrijving, URL, categorie, prioriteit ) VALUES ('$Titel', '$omschrijving', '$URL', '$categorie', $Prioriteit)";
 
-    if ($conn->exec($query) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+
+
 if ( isset($_POST['update'])) {
 
     $Titel = $_POST['Titel'];
     $Prioriteit = $_POST['prioriteit'];
 
-    $conn->exec("UPDATE Bron SET Prioriteit = $Prioriteit WHERE Titel = '$Titel' ");
+    $sql = ("UPDATE Bron SET Prioriteit = $Prioriteit WHERE Titel = '$Titel' ");
+    $conn->query($sql);
 
-    }
+}
 
-    if (isset($_POST['delete'])){
+if (isset($_POST['delete'])){
     $Titel = $_POST['Titel'];
     //$BronID = $_GET['BronID'];
-    $GET = $conn->prepare("SELECT BronID FROM Bron WHERE Titel='$Titel'");
-    $GET->execute();
-    $git = $GET->fetch();
-    $BronID = $git["BronID"];
+    $sql = "SELECT BronID FROM Bron WHERE Titel = '$Titel'";
+    $result = $conn->query($sql);
+    $result1 = $result->fetch_assoc();
+    $BronID = $result1['BronID'];
 
-        $conn->exec("DELETE FROM Bron WHERE BronID='$BronID'");
+    $sqldelete = "DELETE FROM Bron WHERE BronID='$BronID'";
+    $conn->query($sqldelete);
+
+
 }
 
 ?>
 <html lang="nl">
-<body>
-<div>
-    <nav
-            class="navbar navbar-expand-sm navbar-dark"
-            style="background-color: #000000;"
-    >
-        <a
-                class="navbar-brand"
-                href="https://start.nhlstenden.com/"
-                target="blanc"
-        >Start NHL Stenden</a
-        >
-        <button
-                class="navbar-toggler d-lg-none"
-                type="button"
-                data-toggle="collapse"
-                data-target="#collapsibleNavId"
-                aria-controls="collapsibleNavId"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-        ></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <?php
-
-                //Dynamic buttons if user is not logged in show home if user is logged in show the rest aswell  //Marco
-
-                if (!isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
-
-                }
-
-                if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
-                    echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
-
-                }
-                ?>
-            </ul>
-
-
-            <form class="form-inline my-2 my-lg-0">
-                <input
-                        class="form-control mr-sm-2"
-                        type="text"
-                        placeholder="Zoeken"
-                />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    Zoeken
-                </button>
-            </form>
-        </div>
-    </nav>
-</div>
-
-</body>
-
-
-
 <head>
     <title>Docentenpage</title>
     <!-- Required meta tags -->
@@ -174,10 +111,10 @@ if ( isset($_POST['update'])) {
             <form method="post" action="input.php">
                 <label for="Title">Titel</label>
                 <input type="text" id="Titel" name="Titel" placeholder="De titel">
-                                <br>
+                <br>
                 <input type="submit" value="delete" name="delete">
             </form>
         </div>
-        </div>
+    </div>
 </body>
 </html>
