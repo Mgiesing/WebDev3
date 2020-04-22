@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require 'databaseConnection.php';
+require 'php/databaseConnection.php';
 
 ?>
 <html lang="en">
