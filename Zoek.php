@@ -1,13 +1,7 @@
 <?php
 
 session_start();
-require 'php/databaseConnection.php';
-
-// When someone doesn't have a Id, there are send to the login.php page. //Marco
-if (!isset($_SESSION['username'])) {
-    //TODO: Implemnt multile types of users: a.k.a. Student, Manager enz. and change the page accordingly.
-    header('Location: login.php');
-}
+require 'databaseConnection.php';
 
 ?>
 <html lang="en">
@@ -28,14 +22,16 @@ if (!isset($_SESSION['username'])) {
 
 <body>
 
+<form method="post" action="Zoek.php">
 <ul>
 
-    <li style="float:right"><button type="submit">Submit<i class="fa fa-search"></i></button>
-        <input type="text" placeholder="Search" class="searchTerm"></li>
-    <li><a href="Index.php">Home</a></li>
+    <li style="float:right"><button type="submit" name="zoek">Submit<i class="fa fa-search"></i></button>
+        <input type="text" placeholder="Search" name="zoek" class="searchTerm"></li>
+    <li><a href="index.php">Home</a></li>
     <li><a href="Zoek.php">Zoek bronnen</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
+</form>
 
 <div id="table1" style="float:left" class="btn-group">
 
@@ -67,202 +63,7 @@ if (!isset($_SESSION['username'])) {
     </form>
     <div id="table5">
         <?php
-        $conn = connectdb();
-
-
-
-        if(isset($_POST["zoek"])) {
-            if (empty($_POST['zoek'])) {
-
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-            }
-            else{
-
-                $submit = $_POST['zoek'];
-                $sql = "SELECT * FROM Bron WHERE ( Titel LIKE '%$submit%' OR Omschrijving LIKE '%$submit%') ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-
-            }
-
-
-        } else{
-
-            if(isset($_POST["Noten"]) || isset($_POST["NotenHome"])){
-
-
-                $noten = $_POST['Noten'];
-
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie = '$noten' ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-
-                    }
-                }
-            }
-
-            if(isset($_POST["Youtuber"])) {
-
-                $Youtuber = $_POST['Youtuber'];
-
-                $sql ="SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Youtuber' ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-
-            }
-
-            if(isset($_POST["Games"])) {
-
-                $Games = $_POST['Games'];
-
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Games' ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-
-            }
-
-            if(isset($_POST["Memes"])) {
-
-                $Memes = $_POST['Memes'];
-
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Memes' ORDER BY prioriteit";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-
-            } else if(!isset($_POST['Noten']) && !isset($_POST['Youtuber']) && !isset($_POST['Games']) && !isset($_POST['Memes'])){
-
-
-                $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
-                $conn = connectdb();
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while ($row = $result->fetch_assoc()) {
-
-                        echo "<div id='Bron'>";
-
-                        Echo $row["Titel"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["Omschrijving"];
-                        Echo "<br>";
-                        Echo "<br>";
-                        Echo $row["URL"];
-                        Echo "<br>";
-                        echo "</div>";
-                    }
-                }
-            }
-
-
-        }
-
-
-
-
+        require_once('ZoekListener.php');
         ?>
     </div>
 
