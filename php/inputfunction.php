@@ -38,6 +38,7 @@ function DeleteText(){
     $sql = "SELECT BronID FROM Bron WHERE Titel = '$Titel'";
     $result = $conn->query($sql);
     $result1 = $result->fetch_assoc();
+    $BronID = $result1['BronID'];
     
 
     $sqldelete = "DELETE FROM Bron WHERE BronID='$BronID'";
