@@ -65,12 +65,7 @@ session_start();
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <?php
 
-                //Dynamic buttons if user is not logged in show home if user is logged in show the rest aswell  //Marco
-
-                //Dynamic buttons do work but since Ynte didn't finish the login system you can't physically login.
-                //The buttons DO work if you could login.
-                //This is the case with all the dynamic buttons because they look for a userId and if no one is logged in there is no userId
-                //If you would like to go to the pages you could currently without being logged in change the link from for example
+               
                 //  /Index.php to Zoek.php
                 if (!isset($_SESSION['username'])) {
                     echo '<a class="nav-item active"><a class="nav-link" href="index.php">Home</a>';
