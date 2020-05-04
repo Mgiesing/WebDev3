@@ -31,7 +31,7 @@ function TextBox()
 function TextBoxZoek(){
 
 
-    $submit = $_POST['zoek'];
+    $submit = filter_var($_POST['zoek'], FILTER_SANITIZE_STRING);
     $conn = connectdb();
     $sql = "SELECT * FROM Bron WHERE ( Titel LIKE '%$submit%' OR Omschrijving LIKE '%$submit%') ORDER BY prioriteit";
     $result = $conn->query($sql);
