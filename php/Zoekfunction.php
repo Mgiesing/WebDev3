@@ -4,9 +4,10 @@
 function TextBox()
 {
 
-    $sql = "SELECT Titel, Omschrijving, URL FROM Bron ORDER BY prioriteit";
+    $sql = "SELECT * FROM Bron ORDER BY prioriteit";
     $conn = connectdb();
     $result = $conn->query($sql);
+
 
     if ($result->num_rows > 0) {
         // output data of each row
@@ -30,11 +31,13 @@ function TextBox()
 
 function TextBoxZoek(){
 
-
-    $submit = filter_var($_POST['zoek'], FILTER_SANITIZE_STRING);
     $conn = connectdb();
-    $sql = "SELECT * FROM Bron WHERE ( Titel LIKE '%$submit%' OR Omschrijving LIKE '%$submit%') ORDER BY prioriteit";
-    $result = $conn->query($sql);
+    $submit = filter_var("%{$_POST['zoek']}%", FILTER_SANITIZE_STRING);
+    $sql = "SELECT * FROM Bron WHERE Titel OR Omschrijving LIKE ? ORDER BY prioriteit";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $submit);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // output data of each row
