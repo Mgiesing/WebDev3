@@ -3,45 +3,49 @@
 function AddText(){
 
     $conn = connectdb();
-    $Titel = $_POST['Titel'];
-    $omschrijving = $_POST['omschrijving'];
-    $URL = $_POST['URL'];
-    $categorie = $_POST['categorie'];
+
+    $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
+    $omschrijving = filter_var($_POST['omschrijving'], FILTER_SANITIZE_STRING);
+    $URL = filter_var($_POST['URL'], FILTER_SANITIZE_STRING);
+    $categorie = filter_var($_POST['categorie'], FILTER_SANITIZE_STRING);
     $Prioriteit = $_POST ['prioriteit'];
 
-    $sql = "INSERT INTO Bron (Titel, Omschrijving, URL, categorie, prioriteit ) VALUES ('$Titel', '$omschrijving', '$URL', '$categorie', $Prioriteit)";
+    $stmt = $conn->prepare("INSERT INTO Bron (Titel, Omschrijving, URL, categorie, prioriteit ) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssi", $Titel, $omschrijving, $URL, $categorie, $Prioriteit);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    $stmt->execute();
+    $stmt->close();
 
 }
 
 function UpdateText(){
 
     $conn = connectdb();
-    $Titel = $_POST['Titel'];
-    $Prioriteit = $_POST['prioriteit'];
+    $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
+    $Prioriteit = filter_var($_POST['prioriteit'], FILTER_SANITIZE_STRING);
 
-    $sql = ("UPDATE Bron SET Prioriteit = $Prioriteit WHERE Titel = '$Titel' ");
-    $conn->query($sql);
+    $stmt = $conn->prepare("UPDATE Bron SET Prioriteit = ? WHERE Titel = ? ");
+    $stmt->bind_param('is', $Prioriteit, $Titel);
+    $stmt->execute();
 
 }
 
 function DeleteText(){
 
     $conn = connectdb();
-    $Titel = $_POST['Titel'];
+    $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
     //$BronID = $_GET['BronID'];
-    $sql = "SELECT BronID FROM Bron WHERE Titel = '$Titel'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT BronID FROM Bron WHERE Titel = ?");
+    $stmt->bind_param('s', $Titel);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $result1 = $result->fetch_assoc();
     $BronID = $result1['BronID'];
-    
 
-    $sqldelete = "DELETE FROM Bron WHERE BronID='$BronID'";
-    $conn->query($sqldelete);
+
+    $sqldelete = $conn->prepare("DELETE FROM Bron WHERE BronID= ?");
+    $sqldelete->bind_param('i', $BronID);
+    $sqldelete->execute();
+
 
 }
