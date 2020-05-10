@@ -21,12 +21,51 @@ function AddText(){
 function UpdateText(){
 
     $conn = connectdb();
+    $omschrijving = filter_var($_POST['omschrijving'], FILTER_SANITIZE_STRING);
+    $URL = filter_var($_POST['URL'], FILTER_SANITIZE_STRING);
+    $categorie = filter_var($_POST['categorie'], FILTER_SANITIZE_STRING);
+    $Prioriteit = $_POST['prioriteit'];
     $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
-    $Prioriteit = filter_var($_POST['prioriteit'], FILTER_SANITIZE_STRING);
 
-    $stmt = $conn->prepare("UPDATE Bron SET Prioriteit = ? WHERE Titel = ? ");
-    $stmt->bind_param('is', $Prioriteit, $Titel);
+    $stmt = $conn->prepare("UPDATE Bron SET Omschrijving = ?, URL = ?,  categorie = ?,  Prioriteit = ? WHERE Titel = ? ");
+    $stmt->bind_param('sssis', $omschrijving,  $URL, $categorie, $Prioriteit, $Titel);
     $stmt->execute();
+
+}
+
+function GetTheText(){
+
+    $conn = connectdb();
+    $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
+    $sql = "SELECT * FROM Bron WHERE Titel = ? ORDER BY prioriteit";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $Titel);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()){
+
+
+            echo "<form method=post action=input.php>";
+            echo "<label for=Title>Titel</label>";
+            echo "<input type=text id=Title name=Titel placeholder=De titel value=$Titel>";
+            echo "<label for=Oschrijving>Omschrijving</label>";
+            echo "<textarea id=Oschrijving name=omschrijving placeholder=De Omschrijving>$row[Omschrijving]</textarea>";
+            echo "<label for=URL>URL-link</label>";
+            echo "<input value= $row[URL]  type=text id=URL name=URL placeholder=URL-link>";
+            echo "<label for=categorie>categorie</label>";
+            echo "<input value= $row[categorie]  type=text id=categorie name=categorie placeholder=categorie>";
+            echo "<label for=prioriteit>prioriteit</label>";
+            echo "<input value= $row[Prioriteit]  type=number id=prioriteit name=prioriteit>";
+            echo "<input type=submit value=update name=update>";
+            echo "</form>";
+
+
+
+        }
+    }
 
 }
 
@@ -34,7 +73,6 @@ function DeleteText(){
 
     $conn = connectdb();
     $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
-    //$BronID = $_GET['BronID'];
     $stmt = $conn->prepare("SELECT BronID FROM Bron WHERE Titel = ?");
     $stmt->bind_param('s', $Titel);
     $stmt->execute();
