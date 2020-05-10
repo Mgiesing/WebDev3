@@ -2,7 +2,6 @@
 
 session_start();
 require 'databaseConnection.php';
-require 'inputListener.php';
 
 
 ?>
@@ -32,7 +31,7 @@ require 'inputListener.php';
             <label for="Title">Titel</label>
             <input type="text" id="Title" name="Titel" placeholder="De titel">
             <label for="Oschrijving">Omschrijving</label>
-            <input type="text" id="Oschrijving" name="omschrijving" placeholder="De Omschrijving">
+            <textarea id="Oschrijving" name="omschrijving" placeholder="De Omschrijving"></textarea>
             <label for="URL">URL-link</label>
             <input type="text" id="URL" name="URL" placeholder="URL-link">
             <label for="categorie">categorie</label>
@@ -50,14 +49,15 @@ require 'inputListener.php';
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <form method="post" action="input.php">
             <label for="Title">Titel</label>
-            <input type="text" id="Title" name="Titel" placeholder="De titel">
-            <label for="prioriteit">prioriteit</label>
-            <input id="prioriteit" name="prioriteit" type="number">
+            <input type="text" id="Title" name="Titel" placeholder="De titel" ">
+            <?
+            require 'inputListener.php';
+            ?>
             <br>
-            <input type="submit" value="update" name="update">
+            <input type="submit" value="GetText" name="GetText">
         </form>
     </div>
-    <div class="row">
+    <div class="row" id="delete">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <form method="post" action="input.php">
                 <label for="Title">Titel</label>
