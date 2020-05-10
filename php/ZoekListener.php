@@ -4,6 +4,9 @@ require 'Zoekfunction.php';
 
 
 
+if(!isset($_POST['zoek']) && !isset($_POST["checkbox"])){
+    TextBox();
+}
 
 
 if(isset($_POST["zoek"])) {
