@@ -5,116 +5,42 @@ session_start();
 if (isset($_SESSION['error'])) unset($_SESSION['error']);
 
 //Require login listener
-require_once('php/registerListener.php');
-
-//Can't go to login page when logged in.
-if (isset($_SESSION['username'])) {
-    header("Location: Index.php");
-}
+require_once('registerListener.php');
+require 'checkLoginDocent.php';
 ?>
-
-
-
 <html>
 <head>
-    <title>Homepage</title>
-    <meta charset="UTF-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <link
-        rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-        crossorigin="anonymous"
-    />
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"
-    ></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" type="text/css" href="Style.css" />
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="helop.css" rel="stylesheet">
 </head>
-
 <body>
 <div>
-    <nav
-        class="navbar navbar-expand-sm navbar-dark"
-        style="background-color: #000000;"
-    >
-        <a
-            class="navbar-brand"
-            href="https://start.nhlstenden.com/"
-            target="blanc"
-        >Start NHL Stenden</a
-        >
-        <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        ></button>
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
+        <a class="navbar-brand" href="https://start.nhlstenden.com/" target="blanc">Start NHL Stenden</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <?php
+                <a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>
+                <a class="nav-item active"><a class="nav-link" href="input.php">Database</a>
+                <a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>
+                <a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>
+                <a class="nav-item active"><a class="nav-link" href="signup.php">Create Account</a>
 
-                //Dynamic buttons if user is not logged in show home if user is logged in show the rest aswell  //Marco
-
-                if (!isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
-
-                }
-
-                if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
-                    echo '<a style="color: white;" class="nav-link" href="php/logoutListener.php">Logout</a>';
-
-                }
-                ?>
             </ul>
-
-
-            <form class="form-inline my-2 my-lg-0">
-                <input
-                    class="form-control mr-sm-2"
-                    type="text"
-                    placeholder="Zoeken"
-                />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    Zoeken
-                </button>
-            </form>
         </div>
     </nav>
 </div>
-
-
 <br />
 <div class="container" style="width:500px;">
     <?php
     //If there is a error, display it to the user.
     if (isset($_SESSION['error'])) {
-    echo '<br><div class="alert alert-primary" role="alert">' . $_SESSION['error'] . '</div>';
-    };
+        echo '<br><div class="alert alert-primary" role="alert">' . $_SESSION['error'] . '</div>';
+    }
     ?>
-    <h3 align="">Signup</h3><br />
+    <h3 align="">Signup Student</h3><br />
     <form method="post" id="registerform">
         <label>email</label>
         <input type="text" name="username" class="form-control" />
@@ -125,10 +51,23 @@ if (isset($_SESSION['username'])) {
         <label>Password again</label>
         <input type="password" name="passwordVerify" class="form-control" />
         <br />
-        <input type="submit" name="registerFormSubmit" class="btn btn-info" value="Register" />
+        <input type="submit" name="registerFormSubmitStudent" class="btn btn-info" value="Register Student" />
     </form>
 
+    <h3 align="">Signup Teacher</h3><br />
+    <form method="post" id="registerform">
+        <label>email</label>
+        <input type="text" name="username" class="form-control" />
+        <br />
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" />
+        <br />
+        <label>Password again</label>
+        <input type="password" name="passwordVerify" class="form-control" />
+        <br />
+        <input type="submit" name="registerFormSubmitDocent" class="btn btn-info" value="Register Teacher" />
     </form>
+
 </div>
 <br />
 </body>
