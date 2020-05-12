@@ -2,6 +2,7 @@
 
 session_start();
 require 'databaseConnection.php';
+require 'checkLogin.php';
 
 ?>
 <html lang="en">
@@ -27,7 +28,7 @@ require 'databaseConnection.php';
 
     <li style="float:right"><button type="submit" name="zoek">Submit<i class="fa fa-search"></i></button>
         <input type="text" placeholder="Search" name="zoek" class="searchTerm"></li>
-    <li><a href="index.php">Home</a></li>
+    <li><a href="Index.php">Home</a></li>
     <li><a href="Zoek.php">Zoek bronnen</a></li>
     <li><a href="">Portfolio</a></li>
 </ul>
