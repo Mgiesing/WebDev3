@@ -1,8 +1,7 @@
 <?php
 //Start session, needed for header checks //Marco
 session_start();
-
-//var_dump($_SESSION);
+require 'IndexListener.php'
 ?>
 
 
@@ -42,52 +41,20 @@ session_start();
 
 <body>
 <div>
-    <nav
-        class="navbar navbar-expand-sm navbar-dark"
-        style="background-color: #000000;"
-    >
-        <a
-            class="navbar-brand"
-            href="https://start.nhlstenden.com/"
-            target="blanc"
-        >Start NHL Stenden</a
-        >
-        <button
-            class="navbar-toggler d-lg-none"
-            type="button"
-            data-toggle="collapse"
-            data-target="#collapsibleNavId"
-            aria-controls="collapsibleNavId"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-        ></button>
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
+        <a class="navbar-brand" href="https://start.nhlstenden.com/" target="blanc">Start NHL Stenden</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <?php
-
-               
-                //  /Index.php to Zoek.php
-                if (!isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="index.php">Home</a>';
-
-                }
-
-                if (isset($_SESSION['username'])) {
-                    echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
-                    echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
-                    echo '<a style="color: white;" class="nav-link" href="logoutListener.php">Logout</a>';
-
-                }
+                ShowNavbar()
                 ?>
             </ul>
 
 
             <form class="form-inline my-2 my-lg-0" method="post" action="Zoek.php">
-                <input
-                    class="form-control mr-sm-2" type="text" placeholder="Zoeken" name="zoek"
-                />
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="Noten">
+                <input class="form-control mr-sm-2" type="text" placeholder="Zoeken" name="zoek"/>
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
                     Zoeken
                 </button>
             </form>
@@ -113,32 +80,36 @@ session_start();
                 <form method="post" action="Zoek.php">
                 <button class="btn btn-homepage" id="btn4" type="submit" name="Games">Leerpocessen, lesopbouw en toetsing</button><br>
                 </form>
+                <form>
                 <button class="btn btn-homepage" id="btn5" href="">Natuurweten-schappelijke denk- en werkwijzen</button><br>
+                </form>
+                <form>
                 <button class="btn btn-homepage" id="btn6" href="">Digitale didactiek</button><br>
+                </form>
 
                 <!-- Dynamic buttons -->
                 <?php
                 //Dynamic buttons if user is not logged in show login if user is logged in show logout  //Marco
-                if (!isset($_SESSION['username'])) {
-                    echo '<button class="nav-item active"><a class="nav-link" href="login.php">Inloggen</a></button>';
-
-                }
-                if (isset($_SESSION['username'])) {
-                    echo '<a style="color: white;" class="nav-link" href="logoutListener.php">Logout</a>';
-
-
-                }
+                logbutton()
                 ?>
             </div>
 
             <div class="col-xl-2">
+                <form>
                 <button class="btn btn-homepage" id="btn7" href="">Doorlopende leerlijn en samenhang met andere vakken</button><br>
+                </form>
+                <form>
                 <button class="btn btn-homepage" id="btn8" href="">Social scientific issues<br>
-                    <button class="btn btn-homepage" id="btn9" href="">Vakdidactische persoonlijke professionele ontwikkeling<br>
+                </form>
+                <form>
+                <button class="btn btn-homepage" id="btn9" href="">Vakdidactische persoonlijke professionele ontwikkeling<br>
+                </form>
             </div>
+            <form>
             <div class="col-sm-3">
                 <button class="btn btncontact">Contact</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
