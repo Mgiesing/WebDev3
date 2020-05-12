@@ -2,11 +2,12 @@
 require_once("databaseConnection.php");
 
 
-if (isset($_POST['registerFormSubmit'])) {
+if (isset($_POST['registerFormSubmitStudent']) || isset($_POST['registerFormSubmitDocent'])){
     //Get username/password from form
     $username = $_POST['username'];
     $password = $_POST['password'];
     $passwordVerify = $_POST['passwordVerify'];
+
 
     //Check if user exists
     $check = userExists($username);
@@ -34,11 +35,16 @@ function createUser($username, $password, $passwordVerify)
     else {
         //Hash user password
         $hash = password_hash($password, PASSWORD_DEFAULT);
+        if (isset($_POST['registerFormSubmitStudent'])) {
+            $Docent = 0;
+        } else{
+            $Docent = 1;
+        }
         //Connect to database
         $conn = connectdb();
 
         // prepare and bind
-        $stmt = $conn->prepare("INSERT INTO Users (username, password) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO Users (username, password, Docent) VALUES (?, ?, $Docent)");
         $stmt->bind_param("ss", $username, $hash);
         $stmt->execute();
 
@@ -72,5 +78,3 @@ function userExists ($username) {
     $stmt->close();
     $conn->close();
 }
-
-?>
