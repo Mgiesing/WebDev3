@@ -60,6 +60,7 @@ function userLogin ($username, $password) {
         session_start();
         $_SESSION['username'] = $user['username'];
         $_SESSION['code'] = $user['code'];
+        $_SESSION['Docent'] = $user['Docent'];
         $_SESSION['error'] = 'Login successvol.';
     } else {
         $_SESSION['error'] = 'Gebruikersnaam of wachtwoord onjuist';
