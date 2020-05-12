@@ -4,7 +4,7 @@ require 'Zoekfunction.php';
 
 
 
-if(!isset($_POST['zoek']) && !isset($_POST["checkbox"])){
+if(!isset($_POST['zoek']) && !isset($_POST["checkbox"]) && !isset($_POST["Noten"]) && !isset($_POST["Youtuber"]) && !isset($_POST["Games"]) && !isset($_POST["Memes"])){
     TextBox();
 }
 
