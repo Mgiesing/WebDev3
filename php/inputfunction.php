@@ -1,5 +1,11 @@
 <?php
 
+function Get(){
+    echo "<label for=Title>Titel</label>";
+    echo "<input type=text id=Title name=Titel placeholder= \"De titel\" >";
+    echo "<input type=\"submit\" name=\"GetText\" value=\"GetText\">";
+}
+
 function AddText(){
 
     $conn = connectdb();
@@ -49,8 +55,8 @@ function GetTheText(){
 
 
             echo "<form method=post action=input.php>";
-            echo "<label for=Title>Titel</label>";
-            echo "<input type=text id=Title name=Titel placeholder=De titel value=$Titel>";
+            echo "<label for=Title>Titel(niet veranderen)</label>";
+            echo "<input type=text id=Title name=Titel placeholder=\"Titel(niet veranderen)\" value=$Titel>";
             echo "<label for=Oschrijving>Omschrijving</label>";
             echo "<textarea id=Oschrijving name=omschrijving placeholder=De Omschrijving>$row[Omschrijving]</textarea>";
             echo "<label for=URL>URL-link</label>";
@@ -83,6 +89,25 @@ function DeleteText(){
 
     $sqldelete = $conn->prepare("DELETE FROM Bron WHERE BronID= ?");
     $sqldelete->bind_param('i', $BronID);
+    $sqldelete->execute();
+
+
+}
+
+function DeleteUser(){
+
+    $conn = connectdb();
+    $username = filter_var($_POST['gebruiker'], FILTER_SANITIZE_STRING);
+    $stmt = $conn->prepare("SELECT code FROM Users WHERE username = ?");
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $result1 = $result->fetch_assoc();
+    $code = $result1['code'];
+
+
+    $sqldelete = $conn->prepare("DELETE FROM Users WHERE code= ?");
+    $sqldelete->bind_param('i', $code);
     $sqldelete->execute();
 
 
