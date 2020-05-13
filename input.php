@@ -19,30 +19,10 @@ require 'inputfunction.php';
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="helop.css" rel="stylesheet">
 
-
-
-
-
-
 </head>
 <body>
 
-<div>
-<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
-<a class="navbar-brand" href="https://start.nhlstenden.com/" target="blanc">Start NHL Stenden</a>
-<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
-<div class="collapse navbar-collapse" id="collapsibleNavId">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <a class="nav-item active"><a class="nav-link" href="index.php">Home</a>
-        <a class="nav-item active"><a class="nav-link" href="input.php">Database</a>
-            <a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>
-                <a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>
-                    <a class="nav-item active"><a class="nav-link" href="signup.php">Create Account</a>
-
-    </ul>
-</div>
-</nav>
-</div>
+<?php include('NavBar.HTML') ?>
 
 <div style="text-align:center">
     <h2>Welkom op de docentenpage </h2>
@@ -86,6 +66,10 @@ require 'inputfunction.php';
     </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <h3 align="">Delete Bron</h3>
+            <?php if(isset($_POST['delete'])){
+                Deleteitfieldempty();
+            }?>
+            <br>
             <form method="post" action="input.php">
                 <label for="Title">Titel</label>
                 <input type="text" id="Titel" name="Titel" placeholder="De titel">
@@ -93,6 +77,9 @@ require 'inputfunction.php';
                 <input type="submit" value="delete" name="delete">
             </form>
             <h3 align="">Delete Gebruiker</h3>
+            <?php if(isset($_POST['DeleteGebruiker'])){
+                Deleteitfieldempty();
+            }?>
             <form method="post" action="input.php">
                 <label for="Title">Gebruiker</label>
                 <input type="text" id="gebruiker" name="gebruiker" placeholder="gebruiker">
