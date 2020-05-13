@@ -28,23 +28,23 @@ if(isset($_POST["zoek"])) {
 
         if (isset($_POST["Noten"])) {
 
-            TextBoxNoten();
+            TextBoxfilter($_POST["Noten"]);
         }
 
         if (isset($_POST["Youtuber"])) {
 
-            TextBoxYoutuber();
+            TextBoxfilter($_POST["Youtuber"]);
         }
 
         if (isset($_POST["Games"])) {
 
-            TextBoxGames();
+            TextBoxfilter($_POST["Games"]);
 
         }
 
         if (isset($_POST["Memes"])) {
 
-            TextBoxMemes();
+            TextBoxFilter($_POST["Memes"]);
 
         } else if (!isset($_POST['Noten']) && !isset($_POST['Youtuber']) && !isset($_POST['Games']) && !isset($_POST['Memes'])) {
 
