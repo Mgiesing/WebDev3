@@ -73,8 +73,10 @@ function userExists ($username) {
     $result = $stmt->get_result(); // get the mysqli result
     $user = $result->fetch_assoc(); // fetch data
 
-    return $user;
-
     $stmt->close();
     $conn->close();
+    
+    return $user;
+
+    
 }
