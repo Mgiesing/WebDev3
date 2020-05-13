@@ -40,45 +40,25 @@ require 'IndexListener.php'
 </head>
 
 <body>
-<div>
-    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
-        <a class="navbar-brand" href="https://start.nhlstenden.com/" target="blanc">Start NHL Stenden</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <?php
-                ShowNavbar()
-                ?>
-            </ul>
-
-
-            <form class="form-inline my-2 my-lg-0" method="post" action="Zoek.php">
-                <input class="form-control mr-sm-2" type="text" placeholder="Zoeken" name="zoek"/>
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    Zoeken
-                </button>
-            </form>
-        </div>
-    </nav>
-</div>
+<?php include('NavBar.HTML') ?>
 <div class="homepage">
     <div class="container">
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-xl-2">
                 <form method="post" action="Zoek.php">
-                    <button class="btn btn-homepage" type="submit" name="Noten" id="btn1">Aard, nut en noodzaak van natuurwetenschappen</button><br>
+                    <button class="btn btn-homepage" value="Noten" type="submit" name="Noten" id="btn1">Aard, nut en noodzaak van natuurwetenschappen</button><br>
                 </form>
                 <form method="post" action="Zoek.php">
-                <button class="btn btn-homepage" type="submit" name="Youtuber" id="btn2" href="">Begripsontwikkeling</button><br>
+                <button class="btn btn-homepage" type="submit" value="Youtuber" name="Youtuber" id="btn2" href="">Begripsontwikkeling</button><br>
                 </form>
                 <form method="post" action="Zoek.php">
-                <button class="btn btn-homepage" id="btn3" type="submit" name="Games" href="">Practicum didactiek</button><br>
+                <button class="btn btn-homepage" id="btn3" type="submit" value="Games" name="Games" href="">Practicum didactiek</button><br>
                 </form>
             </div>
             <div class="col-xl-2">
                 <form method="post" action="Zoek.php">
-                <button class="btn btn-homepage" id="btn4" type="submit" name="Games">Leerpocessen, lesopbouw en toetsing</button><br>
+                <button class="btn btn-homepage" id="btn4" type="submit" value="Memes" name="Memes">Leerpocessen, lesopbouw en toetsing</button><br>
                 </form>
                 <form>
                 <button class="btn btn-homepage" id="btn5" href="">Natuurweten-schappelijke denk- en werkwijzen</button><br>
