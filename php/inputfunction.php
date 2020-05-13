@@ -16,15 +16,15 @@ function AddText(){
         $omschrijving = filter_var($_POST['omschrijving'], FILTER_SANITIZE_STRING);
         $categorie = filter_var($_POST['categorie'], FILTER_SANITIZE_STRING);
         $Prioriteit = $_POST ['prioriteit'];
-        $URL = filter_var($_POST['URL'], FILTER_VALIDATE_URL);
-        if (empty($URL))
+        $URL1 = filter_var($_POST['URL'], FILTER_VALIDATE_URL);
+        if (empty($URL1))
         {
-            print 'URL is niet geldig';
+            return;
         }
         else {
 
             $stmt = $conn->prepare("INSERT INTO Bron (Titel, Omschrijving, URL, categorie, prioriteit ) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssi", $Titel, $omschrijving, $URL, $categorie, $Prioriteit);
+            $stmt->bind_param("ssssi", $Titel, $omschrijving, $URL1, $categorie, $Prioriteit);
 
             $stmt->execute();
             $stmt->close();
@@ -42,20 +42,20 @@ function UpdateText(){
     $categorie = filter_var($_POST['categorie'], FILTER_SANITIZE_STRING);
     $Prioriteit = $_POST['prioriteit'];
     $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
-    $URL = filter_var($_POST['URL'], FILTER_VALIDATE_URL);
-    if (empty($omschrijving) || empty($categorie) || empty($Prioriteit) || empty($Titel) && empty($URL))
+    $URL2 = filter_var($_POST['URL'], FILTER_VALIDATE_URL);
+    if (empty($omschrijving) || empty($categorie) || empty($Prioriteit) || empty($Titel) || empty($_POST['URL']))
     {
         print "een of meerdere velden waren leeg, bron is niet gewijzigd";
         return;
     }
-    if (empty($URL))
+    if (empty($URL2))
     {
         print "URL is niet geldig, bron is niet gewijzigd";
         return;
     } else {
 
         $stmt = $conn->prepare("UPDATE Bron SET Omschrijving = ?, URL = ?,  categorie = ?,  Prioriteit = ? WHERE Titel = ? ");
-        $stmt->bind_param('sssis', $omschrijving, $URL, $categorie, $Prioriteit, $Titel);
+        $stmt->bind_param('sssis', $omschrijving, $URL2, $categorie, $Prioriteit, $Titel);
         $stmt->execute();
     }
 
@@ -142,6 +142,14 @@ function DeleteUser(){
 
 
 }
+
+function URLongeldig(){
+
+    if(empty(filter_var($_POST['URL'], FILTER_VALIDATE_URL)) && !empty($_POST['URL'])) {
+        print 'URL is niet geldig';
+    }
+}
+
 
 function fieldempty(){
     print "alle velden moeten worden ingevuld";
