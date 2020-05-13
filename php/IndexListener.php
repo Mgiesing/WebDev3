@@ -14,7 +14,7 @@ function ShowNavbar(){
         }
 
         if ($_SESSION['Docent'] == true) {
-            echo '<a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>';
+            echo '<a class="nav-item active"><a class="nav-link" href="index.php">Home</a>';
             echo '<a class="nav-item active"><a class="nav-link" href="input.php">Database</a>';
             echo '<a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>';
             echo '<a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>';
