@@ -8,6 +8,10 @@ input[type=text], select, textarea {
     resize: vertical;
 }
 
+#zoek{
+    bottom: 100px;
+}
+
 button{
     padding: 0%;
 }
