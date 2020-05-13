@@ -16,22 +16,7 @@ require 'checkLoginDocent.php';
     <link href="helop.css" rel="stylesheet">
 </head>
 <body>
-<div>
-    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #000000;">
-        <a class="navbar-brand" href="https://start.nhlstenden.com/" target="blanc">Start NHL Stenden</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>
-                <a class="nav-item active"><a class="nav-link" href="input.php">Database</a>
-                <a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>
-                <a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>
-                <a class="nav-item active"><a class="nav-link" href="signup.php">Create Account</a>
-
-            </ul>
-        </div>
-    </nav>
-</div>
+<?php include('NavBar.HTML') ?>
 <br />
 <div class="container" style="width:500px;">
     <?php
@@ -42,29 +27,13 @@ require 'checkLoginDocent.php';
     ?>
     <h3 align="">Signup Student</h3><br />
     <form method="post" id="registerform">
-        <label>email</label>
-        <input type="text" name="username" class="form-control" />
-        <br />
-        <label>Password</label>
-        <input type="password" name="password" class="form-control" />
-        <br />
-        <label>Password again</label>
-        <input type="password" name="passwordVerify" class="form-control" />
-        <br />
+        <?php include "signuphtml.HTML" ?>
         <input type="submit" name="registerFormSubmitStudent" class="btn btn-info" value="Register Student" />
     </form>
 
     <h3 align="">Signup Teacher</h3><br />
     <form method="post" id="registerform">
-        <label>email</label>
-        <input type="text" name="username" class="form-control" />
-        <br />
-        <label>Password</label>
-        <input type="password" name="password" class="form-control" />
-        <br />
-        <label>Password again</label>
-        <input type="password" name="passwordVerify" class="form-control" />
-        <br />
+        <?php include "signuphtml.HTML" ?>
         <input type="submit" name="registerFormSubmitDocent" class="btn btn-info" value="Register Teacher" />
     </form>
 
