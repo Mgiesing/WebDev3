@@ -59,12 +59,11 @@ function TextBoxZoek(){
 
 }
 
-function TextBoxNoten(){
+function TextBoxfilter($categorie){
 
-    $noten = 'Noten';
 
     $conn = connectdb();
-    $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie = '$noten' ORDER BY prioriteit";
+    $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie = '$categorie' ORDER BY prioriteit";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -83,85 +82,6 @@ function TextBoxNoten(){
             Echo "<br>";
             echo "</div>";
 
-        }
-    }
-}
-
-function TextBoxYoutuber(){
-
-    $Youtuber = 'Youtuber';
-    $conn = connectdb();
-    $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Youtuber' ORDER BY prioriteit";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-
-            echo "<div id='Bron'>";
-
-            Echo $row["Titel"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["Omschrijving"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["URL"];
-            Echo "<br>";
-            echo "</div>";
-        }
-    }
-
-}
-
-function TextBoxGames(){
-
-    $Games = 'Games';
-    $conn = connectdb();
-    $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Games' ORDER BY prioriteit";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-
-            echo "<div id='Bron'>";
-
-            Echo $row["Titel"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["Omschrijving"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["URL"];
-            Echo "<br>";
-            echo "</div>";
-        }
-    }
-}
-
-function TextBoxMemes(){
-
-    $Memes = 'Memes';
-    $conn = connectdb();
-    $sql = "SELECT Titel, Omschrijving, URL FROM Bron WHERE categorie='$Memes' ORDER BY prioriteit";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-
-            echo "<div id='Bron'>";
-
-            Echo $row["Titel"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["Omschrijving"];
-            Echo "<br>";
-            Echo "<br>";
-            Echo $row["URL"];
-            Echo "<br>";
-            echo "</div>";
         }
     }
 }
