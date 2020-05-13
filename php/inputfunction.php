@@ -100,18 +100,22 @@ function DeleteText(){
 
     $conn = connectdb();
     $Titel = filter_var($_POST['Titel'], FILTER_SANITIZE_STRING);
-    $stmt = $conn->prepare("SELECT BronID FROM Bron WHERE Titel = ?");
-    $stmt->bind_param('s', $Titel);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $result1 = $result->fetch_assoc();
-    $BronID = $result1['BronID'];
+    if (empty($Titel))
+    {
+        return;
+    } else {
+        $stmt = $conn->prepare("SELECT BronID FROM Bron WHERE Titel = ?");
+        $stmt->bind_param('s', $Titel);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result1 = $result->fetch_assoc();
+        $BronID = $result1['BronID'];
 
 
-    $sqldelete = $conn->prepare("DELETE FROM Bron WHERE BronID= ?");
-    $sqldelete->bind_param('i', $BronID);
-    $sqldelete->execute();
-
+        $sqldelete = $conn->prepare("DELETE FROM Bron WHERE BronID= ?");
+        $sqldelete->bind_param('i', $BronID);
+        $sqldelete->execute();
+    }
 
 }
 
@@ -119,17 +123,22 @@ function DeleteUser(){
 
     $conn = connectdb();
     $username = filter_var($_POST['gebruiker'], FILTER_SANITIZE_STRING);
-    $stmt = $conn->prepare("SELECT code FROM Users WHERE username = ?");
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $result1 = $result->fetch_assoc();
-    $code = $result1['code'];
+    if (empty($username))
+    {
+        return;
+    }else {
+        $stmt = $conn->prepare("SELECT code FROM Users WHERE username = ?");
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $result1 = $result->fetch_assoc();
+        $code = $result1['code'];
 
 
-    $sqldelete = $conn->prepare("DELETE FROM Users WHERE code= ?");
-    $sqldelete->bind_param('i', $code);
-    $sqldelete->execute();
+        $sqldelete = $conn->prepare("DELETE FROM Users WHERE code= ?");
+        $sqldelete->bind_param('i', $code);
+        $sqldelete->execute();
+    }
 
 
 }
@@ -144,4 +153,19 @@ function Submitfieldempty()
         if (empty($_POST['Titel']) || empty($_POST['omschrijving']) || empty($_POST['URL']) || empty($_POST['categorie']) || empty($_POST['prioriteit'])) {
             fieldempty();
         }
+}
+
+function Deleteitfieldempty()
+{
+    if (empty($_POST['Titel']))
+    {
+        fieldempty();
+    }
+}
+function DeleteUserfieldempty()
+{
+    if (empty($_POST['gebruiker']))
+    {
+        fieldempty();
+    }
 }
