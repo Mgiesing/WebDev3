@@ -21,8 +21,6 @@ function connectdb()
 //    echo "Connected successfully";
 
     return $conn;
-
-    $conn->close();
 }
 
 ?>
