@@ -27,13 +27,13 @@ require 'checkLoginDocent.php';
     ?>
     <h3 align="">Signup Student</h3><br />
     <form method="post" id="registerform">
-        <?php include "signuphtml.HTML" ?>
+        <?php include "signupHTML.html" ?>
         <input type="submit" name="registerFormSubmitStudent" class="btn btn-info" value="Register Student" />
     </form>
 
     <h3 align="">Signup Teacher</h3><br />
     <form method="post" id="registerform">
-        <?php include "signuphtml.HTML" ?>
+        <?php include "signupHTML.html" ?>
         <input type="submit" name="registerFormSubmitDocent" class="btn btn-info" value="Register Teacher" />
     </form>
 
