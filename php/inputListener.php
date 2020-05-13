@@ -1,22 +1,28 @@
 <?php
 
 require_once 'inputfunction.php';
-// When someone doesn't have a Id, there are send to the login.php page. 
+// When someone doesn't have a Id, there are send to the login.php page. //Marco
 if (isset($_SESSION['Id'])) {
+    //TODO: Implemnt multile types of users: a.k.a. Student, Manager enz. and change the page accordingly.
     header('Location: login.php');
 }
 
 $conn = connectdb();
 
 if(!isset($_POST["GetText"]))
-            {
-                Get();
-            }
+{
+    Get();
+}
 
 
 if (isset($_POST["submit"])) {
+    if(empty($_POST['Titel'])|| empty($_POST['omschrijving']) || empty($_POST['URL']) || empty($_POST['categorie']) || empty($_POST['prioriteit'])) {
 
-    AddText();
+        return;
+    }
+    else {
+        AddText();
+    }
 }
 
 
@@ -27,7 +33,7 @@ if (isset($_POST['update'])) {
 
 }
 
-if(isset($_POST['GetText'])){
+if(isset($_POST["GetText"])){
 
  GetTheText();
 
