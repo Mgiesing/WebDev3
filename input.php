@@ -3,6 +3,7 @@
 session_start();
 require 'databaseConnection.php';
 require 'checkLoginDocent.php';
+require 'inputfunction.php';
 
 
 ?>
@@ -32,11 +33,11 @@ require 'checkLoginDocent.php';
 <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
 <div class="collapse navbar-collapse" id="collapsibleNavId">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <a class="nav-item active"><a class="nav-link" href="Index.php">Home</a>
+        <a class="nav-item active"><a class="nav-link" href="index.php">Home</a>
         <a class="nav-item active"><a class="nav-link" href="input.php">Database</a>
-        <a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>
-        <a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>
-        <a class="nav-item active"><a class="nav-link" href="signup.php">Create Account</a>
+            <a class="nav-item active"><a class="nav-link" href="Zoek.php">Zoek Bronnen</a>
+                <a class="nav-item active"><a class="nav-link" href="#">Portfolio</a>
+                    <a class="nav-item active"><a class="nav-link" href="signup.php">Create Account</a>
 
     </ul>
 </div>
@@ -52,6 +53,10 @@ require 'checkLoginDocent.php';
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h3 align="">Create Bron</h3>
+        <?php if(isset($_POST['submit'])) {
+        Submitfieldempty(); }?>
+        <br>
+
         <form method="post" action="input.php">
             <label for="Title">Titel</label>
             <input type="text" id="Title" name="Titel" placeholder="De titel">
