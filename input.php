@@ -19,6 +19,11 @@ require 'inputfunction.php';
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="helop.css" rel="stylesheet">
 
+
+
+
+
+
 </head>
 <body>
 
@@ -35,6 +40,8 @@ require 'inputfunction.php';
         <h3 align="">Create Bron</h3>
         <?php if(isset($_POST['submit'])) {
         Submitfieldempty(); }?>
+        <?php if(isset($_POST['submit'])) {
+            URLongeldig(); }?>
         <br>
 
         <form method="post" action="input.php">
@@ -60,6 +67,8 @@ require 'inputfunction.php';
         <h3 align="">Edit Bron</h3>
         <form method="post" action="input.php"
             <?
+            if (isset($_POST['GetText']) && empty($_POST['Titel1']))
+            {Get();}
             require 'inputListener.php';
             ?>
             <br>
@@ -78,7 +87,7 @@ require 'inputfunction.php';
             </form>
             <h3 align="">Delete Gebruiker</h3>
             <?php if(isset($_POST['DeleteGebruiker'])){
-                Deleteitfieldempty();
+                DeleteUserfieldempty();
             }?>
             <form method="post" action="input.php">
                 <label for="Title">Gebruiker</label>
